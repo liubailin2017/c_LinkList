@@ -2,21 +2,42 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-int createListHead(LinkList **head){
+int createListHead(LinkList **head,int n){
 	int c = 0;
 	LinkList *pHead = (LinkList *) malloc(sizeof(LinkList));
 	pHead -> pNext = NULL;
 	int t = 0;
-	scanf("%d",&t);
-	while(t >= 0) { 
+	for(; n> 0;n--) { 
+		scanf("%d",&t);
 		LinkList *tmp = (LinkList *) malloc(sizeof(LinkList));
 		tmp -> elem = t;
 		tmp -> pNext = pHead -> pNext;
 		pHead->pNext = tmp;
 		c++;
-		scanf("%d",&t);
 	}
 	*head = pHead;
+	return c;
+}
+
+int createListTail(LinkList **head,int n) {
+	int c = 0;
+	LinkList *pHead = (LinkList *) malloc(sizeof(LinkList));
+	pHead -> pNext = NULL;
+	*head = pHead;
+	
+	LinkList *tail = pHead;
+	
+	int t = 0;
+	for(; n> 0;n--) { 
+		scanf("%d",&t);
+		LinkList *tmp = (LinkList *) malloc(sizeof(LinkList));
+		tmp -> elem = t;
+		tail -> pNext = tmp;
+		tmp -> pNext = NULL;
+		tail = tmp;
+		c++;
+	}
+	
 	return c;
 }
 
@@ -30,26 +51,28 @@ int printList(LinkList *pHead) {
 }
 
 int getElem(LinkList *head,int i,ElemType *elem){
-	if(i < 0) return -1;
+	
+	if(i < 0) return -2;
 	if(head == NULL) return -1;
+	
 	head = head->pNext;
-	while(i--){ 
+	int n = 0; 
+	for(; n < i;n++){ 
 		if(head == NULL) break; 
 		head = head->pNext;
 	}
 	if(head == NULL) 
-		return -1;
+		return -2;
 	else{ 
 		*elem = head-> elem;
 		return i;
-
 	}
 	
 }
 // test
 int main() { 
 	LinkList *h; 
-	printf("created count of listList:%d\n",createListHead(&h));
+	printf("created count of listList:%d\n",createListTail(&h,4));
 	printf("head");
 	printf("count : %d\n",printList(h));
 

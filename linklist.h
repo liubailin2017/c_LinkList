@@ -2,8 +2,10 @@
 #ifndef _linklist_h
 #define _linklist_h 1
 
-
+#ifndef NULL 
+/** null ptr **/
 #define NULL 0 
+#endif
 
 #define debug 1
 
@@ -20,11 +22,14 @@ typedef struct LinkList{
 	struct LinkList* pNext;	
 } LinkList;
 
-int createListHead(LinkList **);
-int createListTail(LinkList **);
+int createListHead(LinkList **,int n);
+int createListTail(LinkList **,int n);
 int getlength(LinkList *);
 int printList(LinkList *);
-int getElem(LinkList *,int i,ElemType *);
+/*
+返回-2 越界 -1 未找到, 如果大于或等于0 找到
+*/
+int getElem(LinkList *,int i,ElemType *); 
 int insertList(LinkList *, int i, ElemType data);
 int insertListTail(LinkList *, ElemType data);
 int deleteList(LinkList *, int i, ElemType *data);

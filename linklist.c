@@ -2,13 +2,15 @@
 #include<stdlib.h>
 #include<stdio.h>
 
+
+
 int createListHead(LinkList **head,int n){
 	int c = 0;
 	LinkList *pHead = (LinkList *) malloc(sizeof(LinkList));
 	pHead -> pNext = NULL;
-	int t = 0;
+	ElemType t;
 	for(; n> 0;n--) { 
-		scanf("%d",&t);
+		inputElemtValue(&t);
 		LinkList *tmp = (LinkList *) malloc(sizeof(LinkList));
 		tmp -> elem = t;
 		tmp -> pNext = pHead -> pNext;
@@ -27,9 +29,9 @@ int createListTail(LinkList **head,int n) {
 	
 	LinkList *tail = pHead;
 	
-	int t = 0;
+	ElemType t ;
 	for(; n> 0;n--) { 
-		scanf("%d",&t);
+		inputElemtValue(&t);
 		LinkList *tmp = (LinkList *) malloc(sizeof(LinkList));
 		tmp -> elem = t;
 		tail -> pNext = tmp;
@@ -49,6 +51,17 @@ int printList(LinkList *pHead) {
 	}
 	return c;
 }
+
+int queryList(LinkList *pHead,fHandladapter handler) {
+	int c = 0;
+		while(pHead = pHead->pNext){
+			if(!handler(*pHead)) break;
+			c++;
+		}
+		return c;
+}
+
+
 
 int getElem(LinkList *head,int i,ElemType *elem){
 	
@@ -74,7 +87,7 @@ int main() {
 	LinkList *h; 
 	printf("created count of listList:%d\n",createListTail(&h,4));
 	printf("head");
-	printf("count : %d\n",printList(h));
+	printf("count : %d\n",queryList(h,example_handler));
 
 	ElemType elem;
 	printf("no. 2 :%d",getElem(h,2,&elem));

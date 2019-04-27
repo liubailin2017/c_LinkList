@@ -1,4 +1,7 @@
-
+/*
+ Note !
+ 所有函数实现，默认头结点是不存放数据的．
+ * */
 #ifndef _linklist_h
 #define _linklist_h 1
 #include<stdio.h>
@@ -56,6 +59,7 @@ typedef int (*fHandladapter)(LinkList node);
 
 int createListHead(LinkList **,int n);
 int createListTail(LinkList **,int n);
+
 int getlength(LinkList *);
 int printList(LinkList *);
 

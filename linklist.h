@@ -16,21 +16,12 @@
 #if debug
 	typedef int ElemType;
 	#define inputElemtValue(var) intputElemtInt(var) ;
-	ElemType intputElemtInt(ElemType* n) {
-		printf("inputElemtValue");
-		scanf("%d",n);
-		return *n;
-	}
 
 #else 
 	typedef struct {
 		int d; // tmp
 	} ElemType;
 	#define inputElemtValue(var) intputElemtStruct(var);
-	ElemType intputElemtStruct(ElemType* n) {
-		scanf("%d",&(n->d));
-		return *n;
-	}
 
 #endif
 
@@ -42,19 +33,7 @@ typedef struct LinkList{
 } LinkList;
 
 typedef int (*fHandladapter)(LinkList node);
-#if debug
-	int example_handler(LinkList node) {
-		printf("%p->%d\n",&node, node.elem);
-		return 1;
-	}
-#else
-	int example_handler(LinkList node) {
-		printf("%p->%d\n",&node, node.elem.d);
-		return 1;
-	}
-#endif
-
-
+int example_handler(LinkList node);
 
 
 int createListHead(LinkList **,int n);

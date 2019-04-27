@@ -2,6 +2,29 @@
 #include<stdlib.h>
 #include<stdio.h>
 
+#if debug
+ 	ElemType intputElemtInt(ElemType* n) {
+		printf("inputElemtValue");
+		scanf("%d",n);
+		return *n;
+	}	int example_handler(LinkList node) {
+		printf("%p->%d\n",&node, node.elem);
+		return 1;
+	}
+#else
+	ElemType intputElemtStruct(ElemType* n) {
+		scanf("%d",&(n->d));
+		return *n;
+	}
+
+	int example_handler(LinkList node) {
+		printf("%p->%d\n",&node, node.elem.d);
+		return 1;
+	}
+#endif
+
+
+
 int createListHead(LinkList **head,int n){
 	int c = 0;
 	LinkList *pHead = (LinkList *) malloc(sizeof(LinkList));
@@ -175,35 +198,4 @@ int clearList(LinkList *pHead) {
 	return c;
 }
 
-// test
-// /*
-int main() { 
-	LinkList *h; 
-	printf("### TEST create\n");
-	printf("created count of listList:%d\n",createListTail(&h,4));
 
-	printf("### TEST getElem\n");
-	ElemType elem;
-	printf("no. 2 :%d",getElem(h,2,&elem));
-	printf("value: %d\n",elem);
-	printf("no. 0 :%d",getElem(h,0,&elem));
-	printf("value: %d\n",elem);
-
-	printf("### TEST insert\n");
-
-	insertList(h,0,100);
-	insertListTail(h,1000);
-	insertListTail(h,2000);
-	printf("head");
-	printf("count : %d\n",queryList(h,example_handler));
-	printf("### TEST delete\n ");
-	ElemType t;
-	deleteList(h,0,&t);
-	printf("delete %d\n",t);
-	printf("count : %d\n",queryList(h,example_handler));
-
-	printf("### TEST clear\n");
-	printf("ret %d\n",clearList(h));
-	printf("size%d \n",getlength(h));
-}
-// */
